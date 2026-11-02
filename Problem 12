@@ -1,0 +1,67 @@
+db.createCollection("employee")
+
+db.employee.insertMany([
+    {empid:1, ename:"ROHIT", dept:"Computer", salary:45000},
+    {empid:2, ename:"ADITYA", dept:"IT", salary:25000},
+    {empid:3, ename:"SAURABH", dept:"Computer", salary:35000},
+    {empid:4, ename:"YASH", dept:"HR", salary:50000},
+    {empid:5, ename:"ATHARVA", dept:"IT", salary:28000},
+    {empid:6, ename:"PRANAV", dept:"Computer", salary:40000},
+    {empid:7, ename:"RAHUL", dept:"HR", salary:20000},
+    {empid:8, ename:"AMIT", dept:"Computer", salary:55000},
+    {empid:9, ename:"POOJA", dept:"IT", salary:32000},
+    {empid:10, ename:"PRIYA", dept:"HR", salary:60000}
+])
+
+db.employee.find()
+
+db.employee.find({dept:"Computer"})
+
+db.employee.find({
+    $or:[
+        {dept:"Computer"},
+        {dept:"IT"}
+    ]
+})
+
+db.employee.find({salary:{$gt:30000}})
+
+db.employee.find({
+    salary:{$gte:40000},
+    dept:"Computer"
+})
+
+db.employee.createIndex({ename:1})
+db.employee.getIndexes()
+db.employee.dropIndex({ename:1})
+
+db.employee.find({
+    salary:{$gte:20000,$lte:40000}
+})
+
+db.employee.find({
+    dept:{$ne:"IT"}
+})
+
+
+db.employee.aggregate([
+    {
+        $group:{
+            _id:"$dept",
+            TOTAL_SALARY:{$sum:"$salary"}
+        }
+    }
+])
+
+
+db.employee.aggregate([
+    {
+        $group:{
+            _id:"$dept",
+            AVERAGE_SALARY:{$avg:"$salary"}
+        }
+    }
+])
+
+
+db.employee.find().pretty()
