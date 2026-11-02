@@ -43,7 +43,7 @@ BEGIN
         WHEN TOTAL_MARKS >= 825 AND TOTAL_MARKS <= 899
         THEN 'HIGHER SECOND CLASS'
 
-        ELSE 'NO CATEGORY'
+        ELSE 'FAIL'
 
     END
 
